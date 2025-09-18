@@ -58,7 +58,6 @@ export class TaskForm {
     }
   }
 
-  // Getter para facilitar acceso en template
   get title() {
     return this.form.get('title');
   }

@@ -32,36 +32,27 @@ interface TaskWithUser extends Task {
 export class TaskUserList {
   private taskService = inject(TaskService);
   private dialog = inject(MatDialog);
-
-  // Input para recibir la lista de tareas
   tasks = input<TaskWithUser[]>([]);
-
-  // Columnas de la tabla
   displayedColumns: string[] = ['completed', 'title', 'description', 'user', 'actions'];
 
-  // Método para obtener el estado de la tarea
   getStatusClass(completed: boolean): string {
     return completed ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
   }
 
-  // Método para obtener el estado del usuario
   getUserStatusClass(active: boolean): string {
     return active ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800';
   }
 
-  // Método para marcar/desmarcar tarea como completada
   toggleTaskCompletion(taskId: number) {
     this.taskService.toggleTaskCompletion(taskId);
   }
 
-  // Método para eliminar tarea
   deleteTask(task: Task) {
     if (confirm(`¿Estás seguro de que quieres eliminar la tarea "${task.title}"?`)) {
       this.taskService.deleteTask(task.id);
     }
   }
 
-  // Método para editar tarea
   editTask(task: Task) {
     const dialogRef = this.dialog.open(TaskEditedModal, {
       width: '600px',

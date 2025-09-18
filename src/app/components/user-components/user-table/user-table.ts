@@ -25,19 +25,13 @@ import { UserEditedModal } from '../user-edited-modal/user-edited-modal';
 export class UsersTable {
   private userService = inject(UserService);
   private dialog = inject(MatDialog);
-
-  // Input para recibir la lista de usuarios
   users = input<User[]>([]);
-
-  // Columnas de la tabla
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
 
-  // Método para obtener el nombre del rol
   getRoleName(roleId: string): string {
     return this.userService.getRoleName(roleId);
   }
 
-  // Método para editar usuario
   editUser(user: User) {
     const dialogRef = this.dialog.open(UserEditedModal, {
       width: '600px',
@@ -51,7 +45,6 @@ export class UsersTable {
     });
   }
 
-  // Método para eliminar usuario
   deleteUser(user: User) {
     if (confirm(`¿Estás seguro de que quieres eliminar al usuario ${user.name}?`)) {
       this.userService.deleteUser(user.id);

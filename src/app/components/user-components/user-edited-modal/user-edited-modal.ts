@@ -35,14 +35,8 @@ export class UserEditedModal implements OnInit {
   private fb = inject(FormBuilder);
   private dialogRef = inject(MatDialogRef<UserEditedModal>);
   private userService = inject(UserService);
-
-  // Datos del usuario a editar
   user = inject<User>(MAT_DIALOG_DATA);
-
-  // Formulario reactivo
   form: FormGroup;
-
-  // Rol seleccionado
   selectedRole: string = '2';
 
   constructor() {
@@ -54,7 +48,6 @@ export class UserEditedModal implements OnInit {
   }
 
   ngOnInit() {
-    // Cargar datos del usuario en el formulario
     this.selectedRole = this.user.role;
     this.form.patchValue({
       name: this.user.name,
@@ -63,13 +56,11 @@ export class UserEditedModal implements OnInit {
     });
   }
 
-  // Método para manejar cambio de rol
   onRoleChange(role: string) {
     this.selectedRole = role;
     this.form.patchValue({ role: role });
   }
 
-  // Método para guardar cambios
   onSave() {
     if (this.form.valid) {
       const updatedUser = {
@@ -81,12 +72,10 @@ export class UserEditedModal implements OnInit {
     }
   }
 
-  // Método para cancelar
   onCancel() {
     this.dialogRef.close();
   }
 
-  // Getters para validaciones
   get name() {
     return this.form.get('name');
   }

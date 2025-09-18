@@ -35,14 +35,8 @@ export class TaskEditedModal implements OnInit {
   private fb = inject(FormBuilder);
   private dialogRef = inject(MatDialogRef<TaskEditedModal>);
   private userService = inject(UserService);
-
-  // Datos de la tarea a editar
   task = inject<Task>(MAT_DIALOG_DATA);
-
-  // Formulario reactivo
   form: FormGroup;
-
-  // Obtener usuarios disponibles
   users = this.userService.users;
 
   constructor() {
@@ -55,7 +49,6 @@ export class TaskEditedModal implements OnInit {
   }
 
   ngOnInit() {
-    // Cargar datos de la tarea en el formulario
     this.form.patchValue({
       title: this.task.title,
       description: this.task.description,
@@ -64,7 +57,6 @@ export class TaskEditedModal implements OnInit {
     });
   }
 
-  // Método para guardar cambios
   onSave() {
     if (this.form.valid) {
       const updatedTask = {
@@ -75,12 +67,10 @@ export class TaskEditedModal implements OnInit {
     }
   }
 
-  // Método para cancelar
   onCancel() {
     this.dialogRef.close();
   }
 
-  // Getters para validaciones
   get title() {
     return this.form.get('title');
   }
