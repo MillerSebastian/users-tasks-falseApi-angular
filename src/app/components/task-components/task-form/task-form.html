@@ -1,0 +1,64 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)" class="space-y-4">
+  <div class="grid grid-cols-1 gap-4">
+    <!-- Campo Título -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Título de la Tarea</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        placeholder="Ingresa el título de la tarea"
+        (keydown.enter)="$event.preventDefault()"
+        required
+      />
+      <mat-error *ngIf="title?.invalid && title?.touched">
+        <span *ngIf="title?.errors?.['required']">El título es requerido</span>
+        <span *ngIf="title?.errors?.['minlength']">Mínimo 3 caracteres</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Descripción -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Describe los detalles de la tarea"
+        (keydown.enter)="$event.preventDefault()"
+        rows="3"
+        required
+      ></textarea>
+      <mat-error *ngIf="description?.invalid && description?.touched">
+        <span *ngIf="description?.errors?.['required']">La descripción es requerida</span>
+        <span *ngIf="description?.errors?.['minlength']">Mínimo 10 caracteres</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Usuario Asignado -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Asignar a Usuario</mat-label>
+      <mat-select formControlName="userId" placeholder="Selecciona un usuario">
+        <mat-option *ngFor="let user of users()" [value]="user.id">
+          {{ user.name }} ({{ user.email }})
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="userId?.invalid && userId?.touched">
+        <span *ngIf="userId?.errors?.['required']">Debes seleccionar un usuario</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Botón Submit -->
+  <div class="flex justify-end">
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="onSubmit($event)"
+      [disabled]="form.invalid"
+      class="px-8"
+    >
+      <mat-icon>add</mat-icon>
+      Crear Tarea
+    </button>
+  </div>
+</form>

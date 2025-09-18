@@ -1,0 +1,11 @@
+<button
+  type="button"
+  mat-raised-button
+  color="primary"
+  [disabled]="disabled()"
+  (click)="onSaveClick()"
+  class="px-8"
+>
+  <mat-icon>save</mat-icon>
+  {{ buttonText() }}
+</button>

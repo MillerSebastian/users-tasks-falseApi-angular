@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Editar Usuario</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="space-y-4">
+    <!-- Campo Nombre -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" placeholder="Ingresa el nombre del usuario" />
+      <mat-error *ngIf="name?.invalid && name?.touched">
+        <span *ngIf="name?.errors?.['required']">El nombre es requerido</span>
+        <span *ngIf="name?.errors?.['minlength']">Mínimo 2 caracteres</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Email -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="ejemplo@email.com" type="email" />
+      <mat-error *ngIf="email?.invalid && email?.touched">
+        <span *ngIf="email?.errors?.['required']">El email es requerido</span>
+        <span *ngIf="email?.errors?.['email']">Formato de email inválido</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Rol -->
+    <div class="w-full">
+      <label class="block text-sm font-medium text-gray-700 mb-2">Rol</label>
+      <app-user-role-validate
+        [initialRole]="selectedRole"
+        (roleChange)="onRoleChange($event)"
+      ></app-user-role-validate>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid">
+    Guardar Cambios
+  </button>
+</mat-dialog-actions>

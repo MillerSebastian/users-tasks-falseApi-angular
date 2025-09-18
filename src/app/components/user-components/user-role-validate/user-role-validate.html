@@ -1,0 +1,9 @@
+<mat-button-toggle-group
+  name="userRole"
+  aria-label="User Role"
+  (change)="onRoleChange($event.value)"
+  [value]="currentRole"
+>
+  <mat-button-toggle type="button" value="1">Admin</mat-button-toggle>
+  <mat-button-toggle type="button" value="2">User</mat-button-toggle>
+</mat-button-toggle-group>

@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Editar Tarea</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="space-y-4">
+    <!-- Campo Título -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Título de la Tarea</mat-label>
+      <input matInput formControlName="title" placeholder="Ingresa el título de la tarea" />
+      <mat-error *ngIf="title?.invalid && title?.touched">
+        <span *ngIf="title?.errors?.['required']">El título es requerido</span>
+        <span *ngIf="title?.errors?.['minlength']">Mínimo 3 caracteres</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Descripción -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Describe los detalles de la tarea"
+        rows="3"
+      ></textarea>
+      <mat-error *ngIf="description?.invalid && description?.touched">
+        <span *ngIf="description?.errors?.['required']">La descripción es requerida</span>
+        <span *ngIf="description?.errors?.['minlength']">Mínimo 10 caracteres</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Usuario Asignado -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Asignar a Usuario</mat-label>
+      <mat-select formControlName="userId" placeholder="Selecciona un usuario">
+        <mat-option *ngFor="let user of users()" [value]="user.id">
+          {{ user.name }} ({{ user.email }})
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="userId?.invalid && userId?.touched">
+        <span *ngIf="userId?.errors?.['required']">Debes seleccionar un usuario</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo Estado -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="completed">
+        <mat-option [value]="false">Pendiente</mat-option>
+        <mat-option [value]="true">Completada</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="form.invalid">
+    Guardar Cambios
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "sebastian",
+      "email": "sebastian@user.task",
+      "role": "2"
+    },
+    {
+      "id": "bdae",
+      "name": "emilio",
+      "email": "emilio@gmail.com",
+      "role": "1"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "3fdc",
+      "title": "sdafdasdasad",
+      "description": "sdfasdasfasfdaf",
+      "completed": false,
+      "userId": "bdae"
+    }
+  ],
+  "role": [
+    {
+      "id": "1",
+      "name": "admin"
+    },
+    {
+      "id": "2",
+      "name": "user"
+    }
+  ]
+}

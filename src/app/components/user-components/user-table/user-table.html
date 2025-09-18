@@ -1,0 +1,70 @@
+<div class="overflow-x-auto">
+  <table mat-table [dataSource]="users()" class="w-full">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef class="font-semibold">ID</th>
+      <td mat-cell *matCellDef="let user" class="text-gray-600">{{ user.id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef class="font-semibold">Nombre</th>
+      <td mat-cell *matCellDef="let user" class="font-medium">{{ user.name }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef class="font-semibold">Email</th>
+      <td mat-cell *matCellDef="let user" class="text-blue-600">{{ user.email }}</td>
+    </ng-container>
+
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef class="font-semibold">Rol</th>
+      <td mat-cell *matCellDef="let user">
+        <span class="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+          {{ getRoleName(user.role) }}
+        </span>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="font-semibold">Acciones</th>
+      <td mat-cell *matCellDef="let user">
+        <div class="flex space-x-2">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="editUser(user)"
+            class="text-blue-500 hover:text-blue-700"
+            matTooltip="Editar usuario"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="deleteUser(user)"
+            class="text-red-500 hover:text-red-700"
+            matTooltip="Eliminar usuario"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-gray-50"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" class="hover:bg-gray-50"></tr>
+  </table>
+
+  <!-- Mensaje cuando no hay usuarios -->
+  @if (users().length === 0) {
+  <div class="text-center py-8 text-gray-500">
+    <mat-icon class="text-4xl mb-2">people</mat-icon>
+    <p>No hay usuarios registrados</p>
+    <p class="text-sm">Agrega un usuario usando el formulario de arriba</p>
+  </div>
+  }
+</div>
